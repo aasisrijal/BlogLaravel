@@ -14,8 +14,22 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('blog.index')->with('posts', $posts);
+         
+        // $posts = Post::with('writer')->orderBy('created_at', 'desc')->get();
+        //$posts= Post::with('writer')->latest()->get();
+
+        //creating scope
+        //$posts= Post::with('writer')->latestFirst()->get();
+
+        //displaying limited posts use paginate or simplePaginate
+        // $posts= Post::with('writer')->latestFirst()->paginate(4);
+
+        //\DB::enableQueryLog();
+        $posts= Post::with('writer')->latestFirst()->published()->simplePaginate(4);
+
+        // return $posts;
+         return view('blog.index')->with('posts', $posts);
+        //dd(\DB::getQueryLog());
     }
 
     /**

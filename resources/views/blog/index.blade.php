@@ -19,32 +19,31 @@
                             <h2><a href="post.html">{{ $post->title }}</a></h2>
                         <p>{{ $post->excerpt }}</p>
                         </div>
+                        <div class="post-meta padding-10 clearfix">
+                                <div class="pull-left">
+                                    <ul class="post-meta-group">
+                                        <li><i class="fa fa-user"></i><a href="#"> {{ $post->writer->name }}</a></li>
+                                        <li><i class="fa fa-clock-o"></i><time> {{ $post->date }}</time></li>
+                                        <li><i class="fa fa-tags"></i><a href="#"> Blog</a>, <a href="#"> Laravel</a></li>
+                                        <li><i class="fa fa-comments"></i><a href="#">5 Comments</a></li>
+                                    </ul>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="post.html">Continue Reading &raquo;</a>
+                                </div>
+                            </div>
+                        
 
                         
                     </div>
                 </article>
                 @endforeach
             
-                        <div class="post-meta padding-10 clearfix">
-                            <div class="pull-left">
-                                <ul class="post-meta-group">
-                                    <li><i class="fa fa-user"></i><a href="#"> Admin</a></li>
-                                    <li><i class="fa fa-clock-o"></i><time> Dec 31, 2018</time></li>
-                                    <li><i class="fa fa-tags"></i><a href="#"> Vue Js</a>, <a href="#"> Laravel</a></li>
-                                    <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
-                                </ul>
-                            </div>
-                            <div class="pull-right">
-                                <a href="post.html">Continue Reading &raquo;</a>
-                            </div>
-                        </div>
-                    
+                        
                 
                 <nav>
-                  <ul class="pager">
-                    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Newer</a></li>
-                    <li class="next"><a href="#">Older <span aria-hidden="true">&rarr;</span></a></li>
-                  </ul>
+                    {{-- adding next page in post index --}}
+                  {{ $posts->links() }}
                 </nav>
             </div>
 
