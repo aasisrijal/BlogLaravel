@@ -15,6 +15,10 @@ class Post extends Model
         return $this->belongsTo('App\User','author_id');
     }
 
+    public function category(){
+        return $this->belongsTo('Category');
+    }
+
     public function scopeLatestFirst($query){
         return $query->orderBy('created_at', 'desc');
 

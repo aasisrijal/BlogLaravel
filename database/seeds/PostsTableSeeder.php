@@ -34,12 +34,13 @@ class PostsTableSeeder extends Seeder
                 'author_id' => rand(1,3),
                 'title' => $faker->sentence(rand(5,10)),
                 'excerpt' => $faker->text(rand(150,300)),
-                'body' => $faker->paragraph(rand(5,10)),
+                'body' => $faker->paragraph(rand(5,10),true),
                 'slug' => $faker->slug(),
                 'image' => rand(0,1) == 1 ? $image :NULL,
                 'created_at' => clone($date),
                 'updated_at' => clone($date),
-                'published_at' => rand(1,0)==0 ? NULL : $date->addDays( $i+ rand(4,10))
+                'published_at' => rand(1,0)==0 ? NULL : $date->addDays( $i+ rand(4,10)),
+                'category_id' => rand(6,8)
 
             ];
         }

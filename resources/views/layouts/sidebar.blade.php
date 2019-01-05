@@ -19,26 +19,14 @@
             </div>
             <div class="widget-body">
                 <ul class="categories">
+                    @foreach($categories as $category)
                     <li>
-                        <a href="#"><i class="fa fa-angle-right"></i> Web Development</a>
-                        <span class="badge pull-right">10</span>
+                        <a href="{{ route('category',$category->id) }}"><i class="fa fa-angle-right"></i> {{ $category->title }}</a>
+                        <span class="badge pull-right">{{ $category->posts->count() }}</span>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-angle-right"></i> Web Design</a>
-                        <span class="badge pull-right">10</span>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-angle-right"></i> General</a>
-                        <span class="badge pull-right">10</span>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-angle-right"></i> AI</a>
-                        <span class="badge pull-right">10</span>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-angle-right"></i> Engineering</a>
-                        <span class="badge pull-right">10</span>
-                    </li>
+                    @endforeach
+                
+                        
                 </ul>
             </div>
         </div>
