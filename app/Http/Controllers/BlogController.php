@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\User;
 
 class BlogController extends Controller
 {
@@ -14,11 +15,7 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-         
-        $categories = Category::with(['posts' => function($query){
-            $query->published();
-        }])->orderBy('title', 'asc')->get();        
+    {     
         
         //$posts= Post::with('writer')->latest()->get();
 
@@ -29,26 +26,42 @@ class BlogController extends Controller
         // $posts= Post::with('writer')->latestFirst()->paginate(4);
 
         //\DB::enableQueryLog();
-        $posts= Post::with('writer')->latestFirst()->published()->simplePaginate(4);
-
-        // return $posts;
-         return view('blog.index')->with('posts', $posts)->with('categories', $categories);
-        //dd(\DB::getQueryLog());
+        $posts = Post::with('writer')
+                    ->latestFirst()
+                    ->published()
+                    ->simplePaginate(4);
+        
+        //  $posts=Post::with('writer')->get();
+         return view('blog.index')->with('posts', $posts);
+                //dd(\DB::getQueryLog());
     }
 
-    public function category($id){
+    public function category(Category $category){
 
-        $categories = Category::with(['posts' => function($query){
-            $query->published();
-        }])->orderBy('title', 'asc')->get();
+        $categoryName = $category->title;  
 
-        $posts= Post::with('writer')
-            ->latestFirst()
-            ->published()
-            ->where('category_id', $id)
-            ->simplePaginate(4);
+        $posts= $category->posts()
+                        ->with('writer')
+                        ->latestFirst()
+                        ->published()
+                        ->simplePaginate(4);
 
-        return view('blog.index')->with('posts', $posts)->with('categories', $categories);
+        //return view('blog.index')->with('posts', $posts)->with('categories', $categories);
+        return view('blog.index', compact('posts', 'categoryName'));
+
+    }
+
+    public function writer(User $writer){
+
+        $writerName = $writer->name; 
+        $posts= $writer->posts()
+                    ->with('category')
+                    ->latestFirst()
+                    ->published()
+                    ->simplePaginate(4);
+
+        
+         return view('blog.index', compact('posts', 'writerName'));
 
     }
 
@@ -82,7 +95,14 @@ class BlogController extends Controller
     public function show(Post $post)
     {
         //$post = Post::published()->findOrFail($id);
-        return view('blog.show')->with('post', $post);
+       //update post view_count by 1
+        //1st
+    //    $viewCount = $post->view_count + 1;
+    //    $post->update(['view_count' => $viewCount]);
+
+        //2nd
+        $post->increment('view_count');
+        return view('blog.show', compact('post'));
 
     }
 

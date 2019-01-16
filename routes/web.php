@@ -16,3 +16,10 @@ Route::get('/', 'BlogController@index')->name('blog');
 Route::get('/blog/{post}', 'BlogController@show')->name('blog.show');
 
 Route::get('/category/{category}','BlogController@category')->name('category');
+
+Route::get('/writer/{writer}','BlogController@writer')->name('writer');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

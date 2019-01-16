@@ -39,8 +39,8 @@ class PostsTableSeeder extends Seeder
                 'image' => rand(0,1) == 1 ? $image :NULL,
                 'created_at' => clone($date),
                 'updated_at' => clone($date),
-                'published_at' => rand(1,0)==0 ? NULL : $date->addDays( $i+ rand(4,10)),
-                'category_id' => rand(6,8)
+                'published_at' => rand(1,0)==0 ? NULL : $date->addDays( $i+ rand(1,5)),
+                'category_id' => rand(12,14)
 
             ];
         }
