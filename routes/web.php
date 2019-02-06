@@ -23,6 +23,8 @@ Route::get('/writer/{writer}','BlogController@writer')->name('writer');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/signin', function(){
-    return view('auth.login');
+Route::get('/see', function(){
+    return view('backend.home');
 });
+
+Route::resource('/backendblog', 'BackendController');

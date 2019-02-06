@@ -5,7 +5,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="backend/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
         <p>{{ Auth::user()->name }}</p>
@@ -14,14 +14,14 @@
     </div>
 
     <!-- sidebar menu: : style can be found in sidebar.less -->
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu" data-widget="tree">
       <li>
         <a href="{{ route('home') }}">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
       <li class="treeview">
-        <a href="#">
+        <a href="/a">
           <i class="fa fa-pencil"></i>
           <span>Blog</span>
           <span class="pull-right-container">
@@ -29,8 +29,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="#"><i class="fa fa-circle-o"></i> All Posts</a></li>
-          <li><a href="#"><i class="fa fa-circle-o"></i> Add New</a></li>
+          <li><a href="{{ route('blog') }}"><i class="fa fa-circle-o"></i> All Posts</a></li>
+          <li><a href=""><i class="fa fa-circle-o"></i> Add New</a></li>
         </ul>
       </li>
       <li><a href="#"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
